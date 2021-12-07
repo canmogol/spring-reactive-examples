@@ -2,11 +2,43 @@
 
 SpringBoot with JPA/Hibernate, JDBC and R2DBC examples.
 
+There are five applications in this repository, 4 of them are SpringBoot and the last one is a Go application. They all use the same database which you can find in the "docker-compose" folder.
+
+* spring-rest-data
+
+Spring Boot with REST Controller and a Spring Data Repository with a JPA Entity.
+
+* spring-rest-jdbc
+
+Spring Boot with REST Controller and a pooled JDBC connection with a Model.
+
+* spring-webflux-r2dbc
+
+Spring Boot with Webflux Controller and a Spring Data R2DBC Repository with a JPA Entity.
+
+* spring-webflux-r2dbc-no-hibernate
+
+Spring Boot with Webflux Controller and a pooled R2DBC connection with a Model.
+
+
 All the applications are tested with 256MB memory/2 CPU cores and 128MB memory/1 CPU core.
 
 ```
+# spring-rest-data
 docker run -it --rm --memory="256MB" --cpus="2.0" -p 8080:8080 --name spring-rest-data -e "DATABASE=jdbc:postgresql://$HOST_IP:5432/postgres" spring-rest-data
 docker run -it --rm --memory="128MB" --cpus="1.0" -p 8080:8080 --name spring-rest-data -e "DATABASE=jdbc:postgresql://$HOST_IP:5432/postgres" spring-rest-data
+
+# spring-rest-jdbc
+docker run -it --rm --memory="256MB" --cpus="2.0" -p 8080:8080 --name spring-rest-data -e "DATABASE=jdbc:postgresql://$HOST_IP:5432/postgres?user=postgres&password=postgres&connections=99" spring-rest-jdbc
+docker run -it --rm --memory="128MB" --cpus="1.0" -p 8080:8080 --name spring-rest-data -e "DATABASE=jdbc:postgresql://$HOST_IP:5432/postgres?user=postgres&password=postgres&connections=99" spring-rest-jdbc
+
+# spring-webflux-r2dbc
+docker run -it --rm --memory="256MB" --cpus="2.0" -p 8080:8080 --name spring-webflux-r2dbc -e "DATABASE=$HOST_IP" spring-webflux-r2dbc
+docker run -it --rm --memory="128MB" --cpus="1.0" -p 8080:8080 --name spring-webflux-r2dbc -e "DATABASE=$HOST_IP" spring-webflux-r2dbc
+
+# spring-webflux-r2dbc-no-hibernate
+docker run -it --rm --memory="256MB" --cpus="2.0" -p 8080:8080 --name spring-webflux-r2dbc-no-hibernate -e "DATABASE=$HOST_IP" spring-webflux-r2dbc-no-hibernate
+docker run -it --rm --memory="128MB" --cpus="1.0" -p 8080:8080 --name spring-webflux-r2dbc-no-hibernate -e "DATABASE=$HOST_IP" spring-webflux-r2dbc-no-hibernate
 ```
 
 Apache `ab` is used for the load tests.
