@@ -73,40 +73,65 @@ The following are the results for the `ab` tests.
 The `spring-rest-data` and `spring-rest-jdbc` could not handle the following loads under the same memory and CPU limitations (128MB/1CPU core).
 
 
-The following table shows the response times for R2DBC and Go applications under *100* concurrent requets.
+The following table shows the response times for R2DBC, Native R2DBC and Go applications under *100* concurrent requets.
 
-| 500 request / 100 concurrency | R2DBC (ms) NO HIBERNATE 128MB/1C | Go REST(ms) 128MB/1C |
-| ----------------------------- | -------------------------------- | -------------------- |
-| 50%                           | 1717.2                           | 6412.2               |
-| 66%                           | 1744.8                           | 7937.2               |
-| 75%                           | 1809.6                           | 8883.8               |
-| 80%                           | 1905.2                           | 9448.8               |
-| 90%                           | 1941.8                           | 10801.4              |
-| 95%                           | 2041.4                           | 12043.6              |
-| 98%                           | 2054.2                           | 14010.2              |
-| 99%                           | 2064                             | 15300.2              |
-| 100%                          | 2093.8                           | 17780.4              |
+| 500 request / 100 concurrency | Native R2DBC (ms) NO HIBERNATE 128MB/1C | R2DBC (ms) NO HIBERNATE 128MB/1C | Go REST(ms) 128MB/1C |
+| ----------------------------- | --------------------------------------- | -------------------------------- | -------------------- |
+| 50%                           | 3268.6                                  | 1717.2                           | 6412.2               |
+| 66%                           | 3303.6                                  | 1744.8                           | 7937.2               |
+| 75%                           | 3323.2                                  | 1809.6                           | 8883.8               |
+| 80%                           | 3333.6                                  | 1905.2                           | 9448.8               |
+| 90%                           | 3351.8                                  | 1941.8                           | 10801.4              |
+| 95%                           | 3363.2                                  | 2041.4                           | 12043.6              |
+| 98%                           | 3375.2                                  | 2054.2                           | 14010.2              |
+| 99%                           | 3380                                    | 2064                             | 15300.2              |
+| 100%                          | 3387.8                                  | 2093.8                           | 17780.4              |
 
 
 Diagram of the table.
 ![100 Concurrent](img/100c.png "100 Concurrent")
 
 
-The following table shows the response times for R2DBC and Go applications under *200* concurrent requets.
+The following table shows the response times for R2DBC, Native R2DBC and Go applications under *200* concurrent requests.
 
-| 500 request / 200 concurrency | R2DBC (ms) NO HIBERNATE 128MB/1C | Go REST(ms) 128MB/1C |
-| ----------------------------- | -------------------------------- | -------------------- |
-| 50%                           | 3903.6                           | 15403                |
-| 66%                           | 4777.4                           | 18293.6              |
-| 75%                           | 5126.6                           | 20192.4              |
-| 80%                           | 5162.8                           | 21646.6              |
-| 90%                           | 5472.6                           | 25842.4              |
-| 95%                           | 5516.8                           | 30496.4              |
-| 98%                           | 5529.8                           | 36447.4              |
-| 99%                           | 5537.8                           | 39362.4              |
-| 100%                          | 5569                             | 43694.6              |
+| 500 request / 200 concurrency | Native - R2DBC (ms) NO HIBERNATE 128MB/1C | R2DBC (ms) NO HIBERNATE 128MB/1C | Go REST(ms) 128MB/1C |
+| ----------------------------- | ----------------------------------------- | -------------------------------- | -------------------- |
+| 50%                           | 6494.8                                    | 3903.6                           | 15403                |
+| 66%                           | 6613.8                                    | 4777.4                           | 18293.6              |
+| 75%                           | 6673.6                                    | 5126.6                           | 20192.4              |
+| 80%                           | 6699.8                                    | 5162.8                           | 21646.6              |
+| 90%                           | 6741.2                                    | 5472.6                           | 25842.4              |
+| 95%                           | 6783.6                                    | 5516.8                           | 30496.4              |
+| 98%                           | 6906                                      | 5529.8                           | 36447.4              |
+| 99%                           | 6944                                      | 5537.8                           | 39362.4              |
+| 100%                          | 6993.8                                    | 5569                             | 43694.6              |
 
 
 Diagram of the table.
 ![200 Concurrent](img/200c.png "200 Concurrent")
+
+
+The following table shows the response times for R2DBC, Native R2DBC and Go applications under *200* concurrent requests with 64MB memory and 1 CPU Core. Unfortunately, only the Native R2DBC application could finish the load test. The Go application and the R2DBC application failed under the load with 64MB memory and 1 CPU Core resources.
+
+Also, the maximum memory usage of the Native R2DBC application was around 30-32MB.
+
+| 500 request / 200 concurrency | Native - R2DBC (ms) NO HIBERNATE 64MB/1C | R2DBC (ms) NO HIBERNATE 64MB/1C  | Go REST(ms) 64MB/1C |
+| ----------------------------- | ---------------------------------------- | -------------------------------- | -------------------- |
+| 50%                           | 6716                                     | 0                                | 0                    |
+| 66%                           | 6841.6                                   | 0                                | 0                    |
+| 75%                           | 6888                                     | 0                                | 0                    |
+| 80%                           | 6905.2                                   | 0                                | 0                    |
+| 90%                           | 6938                                     | 0                                | 0                    |
+| 95%                           | 6995                                     | 0                                | 0                    |
+| 98%                           | 7227.8                                   | 0                                | 0                    |
+| 99%                           | 7467.4                                   | 0                                | 0                    |
+| 100%                          | 7556                                     | 0                                | 0                    |
+
+
+Diagram of the table.
+![200 Concurrent 64MB 1 Core](img/200c64.png "200 Concurrent 64MB 1 Core")
+
+
+
+
 
