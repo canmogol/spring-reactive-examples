@@ -1,0 +1,5 @@
+FROM centos:7
+ARG DATABASE
+EXPOSE 8080
+COPY target/spring-webflux-r2dbc-no-hibernate /spring-webflux-r2dbc-no-hibernate
+ENTRYPOINT /spring-webflux-r2dbc-no-hibernate -Dr2dbc.postgresql.host=${DATABASE}
