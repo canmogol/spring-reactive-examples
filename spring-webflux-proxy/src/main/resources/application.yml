@@ -1,5 +1,0 @@
-proxy:
-  host: http://centos:3000/
-logging:
-  level:
-    root: INFO
